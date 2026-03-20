@@ -1,16 +1,22 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function Header() {
   return (
-    <div className="shadow-md">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-8 py-4">
-        <div className="flex items-center">
+    <header className="shadow-md">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-8 py-4 sm:px-8">
+        <Link to="/" className="flex items-center">
           <img src="" alt="" />
           <p className="text-primary-400 text-2xl font-bold">Airbnd</p>
-        </div>
+        </Link>
 
-        <div className="flex items-center rounded-full border border-gray-300 px-4 py-2 shadow-md">
-          <p className="border-r border-r-gray-300 pr-4 pl-2">Qualquer semana</p>
+        <Link
+          to="/"
+          className="hidden items-center rounded-full border border-gray-300 px-4 py-2 shadow-md lg:flex"
+        >
+          <p className="border-r border-r-gray-300 pr-4 pl-2">
+            Qualquer semana
+          </p>
           <p className="border-r border-r-gray-300 px-4">Qualquer lugar</p>
           <p className="px-4">Hóspedes</p>
 
@@ -30,9 +36,12 @@ function Header() {
               />
             </svg>
           </div>
-        </div>
+        </Link>
 
-        <div className="flex items-center gap-2 rounded-full border border-gray-300 px-4 py-2 shadow-md">
+        <Link
+          to="/login"
+          className="flex items-center gap-2 rounded-full border border-gray-300 px-4 py-2 shadow-md"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
@@ -58,10 +67,12 @@ function Header() {
               clipRule="evenodd"
             />
           </svg>
-          <p className="">Marcos Cunha</p>
-        </div>
+          <p className="max-w-20 truncate sm:max-w-32">
+            Marcos Cunha Cunha cunha
+          </p>
+        </Link>
       </div>
-    </div>
+    </header>
   );
 }
 
