@@ -1,7 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function Header() {
+function Header({ user }) {
+  console.log(user);
+
   return (
     <header className="shadow-md">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-8 py-4 sm:px-8">
@@ -39,7 +41,7 @@ function Header() {
         </Link>
 
         <Link
-          to="/login"
+          to={user ? "/account" : "/login"}
           className="flex items-center gap-2 rounded-full border border-gray-300 px-4 py-2 shadow-md"
         >
           <svg
@@ -67,9 +69,12 @@ function Header() {
               clipRule="evenodd"
             />
           </svg>
-          <p className="max-w-20 truncate sm:max-w-32">
-            Marcos Cunha Cunha cunha
-          </p>
+
+          {user ? (
+            <p className="max-w-20 truncate sm:max-w-32">{user.name}</p>
+          ) : (
+            <></>
+          )}
         </Link>
       </div>
     </header>
