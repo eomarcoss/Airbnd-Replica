@@ -1,10 +1,12 @@
 import React, { useState } from "react";
+import Perks from "./Perks";
 
 const NewPlace = () => {
   const [title, setTitle] = useState("");
   const [city, setCity] = useState("");
   const [photos, setPhotos] = useState("");
   const [description, setDescription] = useState("");
+  const [Extras, setExtras] = useState("");
   const handleSubmit = (e) => {
     e.preventDefault();
   };
@@ -83,15 +85,35 @@ const NewPlace = () => {
 
       <div className="flex flex-col gap-1">
         <label htmlFor="title" className="ml-2 text-2xl font-bold">
-          Título
+          Descrição
         </label>
-        <input
-          type="text"
+        <textarea
           placeholder="Digite a descrição do seu anuncio"
-          className="rounded-full border border-gray-300 px-4 py-2"
+          className="h-56 resize-none rounded-2xl border border-gray-300 px-4 py-2"
           value={description}
           id="description"
           onChange={(e) => setDescription(e.target.value)}
+        />
+      </div>
+
+      <div className="flex flex-col gap-1">
+        <label htmlFor="title" className="ml-2 text-2xl font-bold">
+          Comodidades
+        </label>
+
+        <Perks />
+      </div>
+
+      <div className="flex flex-col gap-1">
+        <label htmlFor="Extras" className="ml-2 text-2xl font-bold">
+          Informações adicionais
+        </label>
+        <textarea
+          placeholder="Digite a descrição do seu anuncio"
+          className="h-56 resize-none rounded-2xl border border-gray-300 px-4 py-2"
+          value={Extras}
+          id="Extras"
+          onChange={(e) => setExtras(e.target.value)}
         />
       </div>
     </form>
