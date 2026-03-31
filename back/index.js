@@ -1,6 +1,7 @@
 import "dotenv/config.js";
 import express from "express";
 import UserRoutes from './domains/users/routes.js'
+import PlaceRoutes from './domains/places/routes.js'
 import cors from "cors";
 import cookieParser from "cookie-parser";
 
@@ -15,6 +16,7 @@ app.use(cors({
     credentials: true,
 }));
 app.use('/users', UserRoutes);
+app.use('/places', PlaceRoutes);
 
 app.listen(PORT, () => {
     console.log(`Servidor esta rodando na porta ${PORT}`)

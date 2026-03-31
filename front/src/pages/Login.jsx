@@ -23,7 +23,8 @@ const Login = () => {
         setUser(userDoc);
         setRedirect(true);
       } catch (error) {
-        alert(`Deu um erro ao logar: ${error.response.data}`);
+        // alert(`Deu um erro ao logar: ${error.response.data}`);
+        console.error("Erro ao logar:");
       }
     } else {
       alert("Preencha todos os dados para enviar");

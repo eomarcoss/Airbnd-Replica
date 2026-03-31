@@ -1,5 +1,9 @@
 {
   "dependencies": {
     "jsonwebtoken": "^9.0.3"
+  },
+  "devDependencies": {
+    "prettier": "^3.8.1",
+    "prettier-plugin-tailwindcss": "^0.7.2"
   }
 }
