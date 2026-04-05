@@ -1,30 +1,66 @@
 import React, { useState } from "react";
 import Perks from "./Perks";
+import axios from "axios";
+import { useUserContext } from "../contexts/UserContext";
+import { Navigate } from "react-router-dom";
+import PhotoUploader from "./PhotoUploader";
 
 const NewPlace = () => {
+  const { user } = useUserContext();
   const [title, setTitle] = useState("");
   const [city, setCity] = useState("");
-  const [photos, setPhotos] = useState("");
+  const [photos, setPhotos] = useState([]);
   const [description, setDescription] = useState("");
-  const [Extras, setExtras] = useState("");
+  const [perks, setPerks] = useState([]);
+  const [extras, setExtras] = useState("");
   const [price, setPrice] = useState("");
   const [checkin, setCheckin] = useState("");
   const [checkout, setCheckout] = useState("");
   const [guests, setGuests] = useState("");
-  const handleSubmit = (e) => {
+  const [redirect, setRedirect] = useState(false);
+  const [photolink, setPhotoLink] = useState("");
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // const newPlace = await axios.post("/places", {
-    //   title,
-    //   city,
-    //   photos,
-    //   description,
-    //   Extras,
-    //   price,
-    //   checkin,
-    //   checkout,
-    //   guests,
-    // });
+
+    if (
+      title &&
+      city &&
+      description &&
+      price &&
+      checkin &&
+      checkout &&
+      guests
+    ) {
+      try {
+        const newPlace = await axios.post("/places", {
+          owner: user._id,
+          title,
+          city,
+          photos,
+          description,
+          perks,
+          extras,
+          price,
+          checkin,
+          checkout,
+          guests,
+        });
+
+        console.log(newPlace);
+        setRedirect(true);
+      } catch (error) {
+        console.log(JSON.stringify(error));
+      }
+    } else {
+      alert(
+        "Por favor, preencha todos os campos antes de enviar o formulário.",
+      );
+    }
   };
+
+  if (redirect) return <Navigate to={"/account/places"} />;
+
   return (
     <form onSubmit={handleSubmit} className="flex w-full flex-col gap-4 px-8">
       <div className="flex flex-col gap-1">
@@ -55,48 +91,7 @@ const NewPlace = () => {
         />
       </div>
 
-      <div className="flex flex-col gap-1">
-        <label htmlFor="photos" className="ml-2 text-2xl font-bold">
-          Fotos
-        </label>
-        <div className="flex gap-2">
-          <input
-            type="text"
-            placeholder="Adicione uma foto pelo link dela"
-            className="grow rounded-full border border-gray-300 px-4 py-2"
-            value={photos}
-            id="photos"
-            onChange={(e) => setCity(e.target.value)}
-          />
-          <button className="cursor-pointer rounded-full border border-gray-300 bg-gray-100 px-4 py-2 transition hover:bg-gray-200">
-            Enviar foto
-          </button>
-        </div>
-
-        <div className="mt-2 grid grid-cols-5 gap-4">
-          <label
-            htmlFor="file"
-            className="flex aspect-square cursor-pointer items-center justify-center gap-4 rounded-2xl border border-gray-300 transition hover:bg-gray-200"
-          >
-            <input type="file" id="file" className="hidden" />{" "}
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="size-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5"
-              />
-            </svg>
-            Upload
-          </label>
-        </div>
-      </div>
+      <PhotoUploader {...{ photolink, setPhotoLink, setPhotos, photos }} />
 
       <div className="flex flex-col gap-1">
         <label htmlFor="title" className="ml-2 text-2xl font-bold">
@@ -115,7 +110,7 @@ const NewPlace = () => {
         <label htmlFor="title" className="ml-2 text-2xl font-bold">
           Comodidades
         </label>
-        <Perks />
+        <Perks perks={perks} setPerks={setPerks} />
       </div>
 
       <div className="flex flex-col gap-1">
@@ -125,8 +120,8 @@ const NewPlace = () => {
         <textarea
           placeholder="Digite aqui qualquer informação adicional que queira compartilhar com seus hóspedes"
           className="h-56 resize-none rounded-2xl border border-gray-300 px-4 py-2"
-          value={Extras}
-          id="Extras"
+          value={extras}
+          id="extras"
           onChange={(e) => setExtras(e.target.value)}
         />
       </div>
@@ -196,8 +191,8 @@ const NewPlace = () => {
           </div>
         </div>
       </div>
-      <button className="bg-primary-400 hover:bg-primary-500min-w-44 ></form> cursor-pointer rounded-full px-4 py-2 font-bold text-white transition">
-        Salvar informaçoes
+      <button className="bg-primary-400 hover:bg-primary-500 min-w-44 cursor-pointer rounded-full px-4 py-2 font-bold text-white transition">
+        Salvar informações
       </button>
     </form>
   );

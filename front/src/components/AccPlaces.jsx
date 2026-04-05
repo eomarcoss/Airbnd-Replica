@@ -6,15 +6,15 @@ const AccPlaces = () => {
   const { action } = useParams();
 
   return (
-    <div className="w-full max-w-7xl flex flex-col items-center">
+    <div className="flex w-full max-w-7xl flex-col items-center">
       {action !== "new" ? (
         <Link
           to="/account/places/new"
-          className="bg-primary-400  hover:bg-primary-500 flex min-w-44 cursor-pointer gap-2 rounded-full px-4 py-2 text-white transition"
+          className="bg-primary-400 hover:bg-primary-500 flex min-w-44 cursor-pointer gap-2 rounded-full px-4 py-2 text-white transition"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            fill="none" 
+            fill="none"
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
@@ -28,7 +28,9 @@ const AccPlaces = () => {
           </svg>
           Adicionar novo lugar
         </Link>
-      ) : <NewPlace/>}
+      ) : (
+        <NewPlace />
+      )}
     </div>
   );
 };
