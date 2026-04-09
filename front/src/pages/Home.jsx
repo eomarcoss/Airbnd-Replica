@@ -1,18 +1,33 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Item from "../components/Item";
+import axios from "axios";
 
 const Home = () => {
+  const [places, setPlaces] = useState([]);
+
+  useEffect(() => {
+    const axiosGet = async () => {
+      const { data } = await axios.get("/places");
+      setPlaces(data);
+    };
+
+    axiosGet();
+  }, []);
+
   return (
     <section>
       <div className="mx-auto grid max-w-7xl grid-cols-[repeat(auto-fit,minmax(225px,1fr))] gap-8 p-8">
-        <Item />
-        <Item />
-        <Item />
-        <Item />
-        <Item />
-        <Item />
-        <Item />
-        <Item />
+        {places.map((place) => (
+          <Item key={place._id} {...{ place }} />
+        ))}
+
+        {places.map((place) => (
+          <Item key={place._id} {...{ place }} />
+        ))}
+
+        {places.map((place) => (
+          <Item key={place._id} {...{ place }} />
+        ))}
       </div>
     </section>
   );

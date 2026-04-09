@@ -15,18 +15,12 @@ function App() {
   return (
     <UserContextProvider>
       <BrowserRouter>
-        <Header/>
+        <Header />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route
-            path="/login"
-            element={<Login />}
-          />
+          <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route
-            path="/account/:subpage/:action?"
-            element={<Account  />}
-          />
+          <Route path="/account/:subpage/:action?/:id?" element={<Account />} />
         </Routes>
       </BrowserRouter>
     </UserContextProvider>
