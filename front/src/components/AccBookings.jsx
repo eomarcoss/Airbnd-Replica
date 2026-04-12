@@ -17,9 +17,15 @@ const AccBookings = () => {
   return (
     <div>
       <div className="flex w-full max-w-7xl flex-col gap-8">
-        {bookings.map((booking) => (
-          <Booking booking={booking} key={booking._id} />
-        ))}
+        {bookings.length > 0 ? (
+          bookings.map((booking) => (
+            <Booking booking={booking} key={booking._id} />
+          ))
+        ) : (
+          <p className="py-5 font-medium text-black opacity-60">
+            Você ainda não possui reservas!
+          </p>
+        )}
       </div>
     </div>
   );
