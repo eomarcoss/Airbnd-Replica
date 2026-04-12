@@ -69,9 +69,6 @@ Airbnd Replica é uma plataforma de aluguel de acomodações construída com tec
    
 2. **Inicie os servidores:**
 
-
-A aplicação estará disponível em `https://airbnd-replica.onrender.com/`
-
 ---
 
 ### Deploy
