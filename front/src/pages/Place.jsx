@@ -161,13 +161,13 @@ const Place = () => {
         <div className={`grid ${booking ? "" : "grid-cols-1 md:grid-cols-2"}`}>
           <div className="order-2 flex flex-col gap-4 p-6 md:order-0">
             <div className="flex flex-col gap-2">
-              <p className="text-lg font-bold sm:text-2xl">Descricao</p>
+              <p className="text-lg font-bold sm:text-2xl">Descrição</p>
               <p>{place.description}</p>
             </div>
 
             <div className="flex flex-col gap-2">
               <p className="text-lg font-bold sm:text-2xl">
-                Horarios e restricoes
+                Horários e restrições
               </p>
               <div>
                 <p>Checkin: {place.checkin}</p>
@@ -193,7 +193,7 @@ const Place = () => {
           ) : (
             <form className="order-1 flex flex-col gap-4 self-center justify-self-center rounded-2xl border border-gray-300 px-4 py-3 sm:px-8 sm:py-4 md:order-0">
               <p className="text-center text-lg font-bold sm:text-2xl">
-                Preco: R$ {place.price} por noite
+                Preço: R$ {place.price} por noite
               </p>
 
               {/* {checkin e checkout} */}
@@ -221,7 +221,7 @@ const Place = () => {
 
               {/* {convidados} */}
               <div className="flex flex-col gap-2 rounded-2xl border border-gray-300 px-4 py-2">
-                <p className="font-bold"> N de Convidados</p>
+                <p className="font-bold"> Nº de Convidados</p>
                 <input
                   className="rounded-2xl border border-gray-300 px-4 py-2"
                   type="number"
@@ -252,7 +252,7 @@ const Place = () => {
 
         {/* {Extras} */}
         <div className="flex flex-col gap-2 rounded-2xl bg-gray-100 p-6">
-          <p className="text-lg font-bold sm:text-2xl">Informacoes Extras</p>
+          <p className="text-lg font-bold sm:text-2xl">Informações Extras</p>
           <p>{place.extras}</p>
         </div>
 
