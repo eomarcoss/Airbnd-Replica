@@ -30,12 +30,12 @@ const Login = () => {
     }
   };
 
-  // Função para logar automaticamente com as credenciais de demonstração
+  
   const handleDemoLogin = async () => {
     try {
       const { data: userDoc } = await axios.post("/users/login", {
-        email: "recrutador@gmail.com", // Substitua pelo email criado no seu DB
-        password: "senhademo123", // Substitua pela senha criada no seu DB
+        email: "recrutador@gmail.com", 
+        password: "senhademo123", 
       });
 
       setUser(userDoc);
@@ -76,14 +76,14 @@ const Login = () => {
           </button>
         </form>
 
-        {/* Divisor simples */}
+        
         <div className="flex w-full items-center gap-2 text-xs text-gray-400">
           <div className="h-[1px] flex-1 bg-gray-200"></div>
           <span>OU</span>
           <div className="h-[1px] flex-1 bg-gray-200"></div>
         </div>
 
-        {/* Botão de Acesso Rápido para Recrutadores */}
+      
         <button
           type="button"
           onClick={handleDemoLogin}
