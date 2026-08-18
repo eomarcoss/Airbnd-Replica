@@ -23,11 +23,25 @@ const Login = () => {
         setUser(userDoc);
         setRedirect(true);
       } catch (error) {
-        // alert(`Deu um erro ao logar: ${error.response.data}`);
-        console.error("Erro ao logar:");
+        console.error("Erro ao logar:", error);
       }
     } else {
       alert("Preencha todos os dados para enviar");
+    }
+  };
+
+  // Função para logar automaticamente com as credenciais de demonstração
+  const handleDemoLogin = async () => {
+    try {
+      const { data: userDoc } = await axios.post("/users/login", {
+        email: "recrutador@gmail.com", // Substitua pelo email criado no seu DB
+        password: "senhademo123", // Substitua pela senha criada no seu DB
+      });
+
+      setUser(userDoc);
+      setRedirect(true);
+    } catch (error) {
+      console.error("Erro no login de demonstração:", error);
     }
   };
 
@@ -38,11 +52,7 @@ const Login = () => {
       <div className="mx-auto flex w-full max-w-96 flex-col items-center gap-4">
         <h1 className="text-3xl font-bold">Faça seu login</h1>
 
-        <form
-          action=""
-          className="flex w-full flex-col gap-2"
-          onSubmit={handleSubmit}
-        >
+        <form className="flex w-full flex-col gap-2" onSubmit={handleSubmit}>
           <input
             type="email"
             className="w-full rounded-full border border-gray-300 px-4 py-2"
@@ -58,19 +68,33 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
 
-          <button className="bg-primary-400 w-full cursor-pointer rounded-full border border-gray-300 px-4 py-2 font-bold text-white">
+          <button
+            type="submit"
+            className="bg-primary-400 w-full cursor-pointer rounded-full border border-gray-300 px-4 py-2 font-bold text-white"
+          >
             Login
           </button>
         </form>
 
+        {/* Divisor simples */}
+        <div className="flex w-full items-center gap-2 text-xs text-gray-400">
+          <div className="h-[1px] flex-1 bg-gray-200"></div>
+          <span>OU</span>
+          <div className="h-[1px] flex-1 bg-gray-200"></div>
+        </div>
+
+        {/* Botão de Acesso Rápido para Recrutadores */}
+        <button
+          type="button"
+          onClick={handleDemoLogin}
+          className="w-full cursor-pointer rounded-full bg-black px-4 py-2 font-bold text-white transition-opacity hover:opacity-90"
+        >
+          Entrar como Recrutador
+        </button>
+
         <p>
           Ainda não tem conta?{" "}
-          <Link
-            to="/register"
-            rel="stylesheet"
-            href=""
-            className="font-bold underline"
-          >
+          <Link to="/register" className="font-bold underline">
             Registre-se aqui!
           </Link>
         </p>
